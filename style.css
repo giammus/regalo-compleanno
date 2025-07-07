@@ -27,9 +27,13 @@ body {
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
 
+/* NUOVO STILE PER I TITOLI - RESPONSIVO */
 h1 {
-    color: #d9534f;
-    font-size: 2.5em;
+  color: #d9534f;
+  /* Usa clamp() per un font che si adatta allo schermo */
+  /* Min: 1.8rem, Preferito: 5vw, Max: 3rem */
+  font-size: clamp(1.8rem, 5vw, 3rem);
+  line-height: 1.2; /* Migliora l'interlinea per titoli lunghi */
 }
 
 p {
@@ -452,4 +456,78 @@ body.is-leaving {
 @keyframes fadeInText {
     from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
+}
+
+/* =============================================== */
+/* PACCHETTO RESPONSIVE DEFINITIVO                 */
+/* Queste regole si applicano a schermi via via    */
+/* più piccoli, come tablet e telefoni.            */
+/* =============================================== */
+
+/* --- Per Tablet (sia verticali che orizzontali) --- */
+@media (max-width: 1024px) {
+    .container {
+        /* Usiamo una percentuale invece di pixel fissi, con un massimo */
+        width: 90%;
+        max-width: 800px;
+        padding: 30px; /* Riduciamo un po' lo spazio interno */
+    }
+
+    h1 {
+        font-size: 2.5rem; /* Riduciamo un po' i titoli */
+        line-height: 1.2;
+      white-space: normal !important;
+    }
+
+    p {
+        font-size: 1.1rem; /* Riduciamo i paragrafi */
+    }
+}
+
+
+/* --- Per Smartphone (verticali) --- */
+@media (max-width: 480px) {
+    .container {
+        padding: 20px; /* Spazio interno ancora più piccolo */
+    }
+
+    h1 {
+        font-size: 1.8rem; /* Titoli ancora più piccoli per i telefoni */
+    }
+
+    p {
+        font-size: 1rem; /* Testo standard per telefoni */
+    }
+
+    /* Riduciamo anche alcuni elementi specifici dei giochi */
+    .dial {
+        width: 50px;
+        height: 70px;
+        font-size: 2.5em;
+    }
+
+    #button-grid {
+        max-width: 250px;
+    }
+
+    .seq-btn {
+        width: 100px;
+        height: 100px;
+    }
+}
+
+/* Stile per la nuova animazione di scrittura JS */
+.js-typing-animation::after {
+    content: '|';
+    animation: blink 1s step-end infinite;
+}
+
+/* Nasconde il cursore quando l'animazione è finita */
+.js-typing-animation.typing-done::after {
+    content: '';
+}
+
+@keyframes blink {
+    from, to { color: transparent }
+    50% { color: inherit; } /* Usa lo stesso colore del testo */
 }
